@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "albion-market",
-    "slug": "albion-market",
+    "name": "albion-online-tool",
+    "slug": "albion-online-tool",
     "platforms": [
       "ios",
       "android",
@@ -23,6 +23,11 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "android":{
+    "package":"com.jmjles.albiononlinetool",
+    "versionCode":1,
+    "permissions":[]
+  }
   }
 }
