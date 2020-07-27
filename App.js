@@ -44,6 +44,7 @@ export default function App() {
               <Guild
                 guilds={[guilds, setGuilds]}
                 guildName={[guildName, setGuildName]}
+                playerName={[playerName,setPlayerName]}
               />
             }
           />

@@ -16,6 +16,7 @@ import { Spinner } from "native-base";
 export default function ItemResult({
   guilds: [guilds, setGuilds],
   guildName: [guildName, setGuildName],
+  playerName: [playerName,setPlayerName]
 }) {
   const id = useParams().id;
   const history = useHistory();
@@ -51,6 +52,7 @@ export default function ItemResult({
   };
 
   const handlePress = (id,name)=>{
+    setPlayerName(name)
     history.push(`/player/${id}`)
   }
   return (
