@@ -15,6 +15,9 @@ export default function Home() {
       <Link to="/player" style={styles.button}>
         <Text style={styles.buttonText}>Players</Text>
       </Link>
+      <Link to="/options" style={styles.button}>
+        <Text style={styles.buttonText}>Options</Text>
+      </Link>
       <Text style={styles.mark}>@JMJLES</Text>
     </MainLayout>
   );
@@ -24,7 +27,7 @@ const styles = StyleSheet.create({
     fontSize: 48,
     textAlign: "center",
     marginTop: 58,
-    marginBottom: 118,
+    marginBottom: 58,
   },
   button: {
     minWidth: 150,
@@ -34,7 +37,7 @@ const styles = StyleSheet.create({
     borderColor: "black",
     backgroundColor: "#FF5C00",
     borderWidth: 2,
-    marginBottom: 85,
+    marginBottom: 58,
     alignItems:'center',
   },
   buttonText: {
