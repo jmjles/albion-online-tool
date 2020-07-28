@@ -12,11 +12,13 @@ import { useHistory } from "react-router-native";
 import { getGuild, getGuildMember } from "../functions/albion-api.js";
 import ItemLayout from "../layouts/ItemLayout";
 import { Spinner } from "native-base";
+import Translate from "../functions/Translate.js";
 
 export default function ItemResult({
   guilds: [guilds, setGuilds],
   guildName: [guildName, setGuildName],
-  playerName: [playerName,setPlayerName]
+  playerName: [playerName, setPlayerName],
+  lang: [lang, setLang],
 }) {
   const id = useParams().id;
   const history = useHistory();
@@ -51,10 +53,10 @@ export default function ItemResult({
     history.push(`/guild/${id}`);
   };
 
-  const handlePress = (id,name)=>{
-    setPlayerName(name)
-    history.push(`/player/${id}`)
-  }
+  const handlePress = (id, name) => {
+    setPlayerName(name);
+    history.push(`/player/${id}`);
+  };
   return (
     <ItemLayout name={guildName}>
       {loading ? (
@@ -62,8 +64,12 @@ export default function ItemResult({
       ) : (
         <View>
           <View style={styles.related}>
-            <Text style={styles.label}>Related Guilds:</Text>
-            <Picker mode="dropdown" onValueChange={handleChange} style={styles.picker}>
+            <Text style={styles.label}>{Translate["relatedG"][lang]}:</Text>
+            <Picker
+              mode="dropdown"
+              onValueChange={handleChange}
+              style={styles.picker}
+            >
               {guilds.map((guild) => (
                 <Picker.Item
                   label={guild.name}
@@ -75,19 +81,28 @@ export default function ItemResult({
           </View>
 
           <View style={styles.guildInfo}>
-            <Text>{guild.tag && `Alliance Tag: ${guild.tag}`}</Text>
-            <Text>{guild.founderName && `Founder: ${guild.founderName}`}</Text>
             <Text>
-              {guild.memberCount && `Member Count: ${guild.memberCount}`}
+              {guild.tag && `${Translate["allianceT"][lang]}: ${guild.tag}`}
+            </Text>
+            <Text>
+              {guild.founderName &&
+                `${Translate["founder"][lang]}: ${guild.founderName}`}
+            </Text>
+            <Text>
+              {guild.memberCount &&
+                `${Translate["memberC"][lang]}: ${guild.memberCount}`}
             </Text>
           </View>
-          <Text style={styles.title}>Members:</Text>
+          <Text style={styles.title}>{Translate["members"][lang]}:</Text>
           {loading2 ? (
             <Spinner color="red" />
           ) : (
             <ScrollView style={styles.members}>
               {members.map((member) => (
-                <TouchableOpacity style={styles.member} onPress={()=>handlePress(member.id,member.name)}>
+                <TouchableOpacity
+                  style={styles.member}
+                  onPress={() => handlePress(member.id, member.name)}
+                >
                   <Text style={styles.memberText}>{member.name}</Text>
                 </TouchableOpacity>
               ))}
@@ -99,20 +114,20 @@ export default function ItemResult({
   );
 }
 const styles = StyleSheet.create({
-    related:{
-        flexDirection:'row',
-    },
-    label:{
-        lineHeight:43
-    },
-    picker:{
-        minWidth:270
-    },
+  related: {
+    flexDirection: "row",
+  },
+  label: {
+    lineHeight: 43,
+  },
+  picker: {
+    minWidth: 270,
+  },
   guildInfo: {},
   members: {
-      marginTop:15,
-      marginBottom:15,
-      maxHeight:500
+    marginTop: 15,
+    marginBottom: 15,
+    maxHeight: 500,
   },
   member: {
     marginBottom: 10,

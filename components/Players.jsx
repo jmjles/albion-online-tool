@@ -11,9 +11,10 @@ import { Spinner } from 'native-base'
 import { getPlayers } from "../functions/albion-api";
 import SearchLayout from "../layouts/SearchLayout";
 import { useHistory } from "react-router-native";
-export default function Players({playerName:[playerName,setPlayerName]}) {
+import Translate from "../functions/Translate";
+export default function Players({playerName:[playerName,setPlayerName], lang:[lang, setLang]}) {
   const [query, setQuery] = useState("");
-  const [loading,setLoading] =useState(false)
+  const [loading,setLoading] = useState(false)
   const [players,setPlayers] = useState([])
 
   const history = useHistory()
@@ -33,12 +34,13 @@ export default function Players({playerName:[playerName,setPlayerName]}) {
   };
 
   return (
-    <SearchLayout>
+    <SearchLayout lang={lang}>
       <View style={styles.searchContainer}>
         <TextInput
           onChangeText={handleChange}
           value={query}
           style={styles.textinput}
+          placeholder={Translate['enterPlayer'][lang]}
         />
         <TouchableOpacity onPress={handleSubmit} style={styles.button}>
           <Text style={styles.buttonText}>Submit</Text>
@@ -52,6 +54,7 @@ export default function Players({playerName:[playerName,setPlayerName]}) {
             <TouchableOpacity
               onPress={() => handlePress(player.id, player.name)}
               style={styles.player}
+              key={player.id}
             >
               <Text>{player.name}</Text>
             </TouchableOpacity>

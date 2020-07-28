@@ -10,8 +10,9 @@ import { useHistory } from "react-router-native";
 import { getPlayer } from "../functions/albion-api.js";
 import ItemLayout from "../layouts/ItemLayout";
 import { Spinner } from "native-base";
+import Translate from "../functions/Translate.js";
 
-export default function Player({ playerName: [playerName, setPlayerName], guildName:[guildName,setGuildName]}) {
+export default function Player({ playerName: [playerName, setPlayerName], guildName:[guildName,setGuildName], lang:[lang, setLang]}) {
   const id = useParams().id;
   const history = useHistory();
   const [loading, setLoading] = useState(false);
@@ -30,7 +31,7 @@ export default function Player({ playerName: [playerName, setPlayerName], guildN
     history.push(`/guild/${id}`);
   };
   return (
-    <ItemLayout name={playerName}>
+    <ItemLayout name={playerName} >
       {loading ? (
         <Spinner color="red" />
       ) : (
@@ -39,30 +40,30 @@ export default function Player({ playerName: [playerName, setPlayerName], guildN
             <View style={styles.section}>
               <TouchableOpacity onPress={()=>handlePress(player.guildID,player.guildName)}>
                 <Text>
-                  Associate of: {player.alliance && `[${player.alliance}]`}{" "}
+                  {Translate['associate'][lang]}: {player.alliance && `[${player.alliance}]`}{" "}
                   {player.guildName}
                 </Text>
               </TouchableOpacity>
             </View>
           )}
           <View style={styles.section}>
-            <Text style={styles.title}>Combat Stats</Text>
-            {player.killFame && <Text>Kill Fame: {player.killFame}</Text>}
-            {player.deathFame && <Text>Death Fame: {player.deathFame}</Text>}
-            {player.fameRatio && <Text>Fame Ratio: {player.fameRatio}</Text>}
+          <Text style={styles.title}>{Translate['combatStats'][lang]}</Text>
+            {player.killFame && <Text>{Translate['kFame'][lang]}: {player.killFame}</Text>}
+            {player.deathFame && <Text>{Translate['dFame'][lang]}: {player.deathFame}</Text>}
+            {player.fameRatio && <Text>{Translate['fameRatio'][lang]}: {player.fameRatio}</Text>}
           </View>
           <View style={styles.section}>
-            <Text style={styles.title}>PvE Stats</Text>
+          <Text style={styles.title}>{Translate['pveStats'][lang]}</Text>
             {player.royalFame && (
-              <Text>Royal Cont. Fame: {player.killFame}</Text>
+              <Text>{Translate['royalFame'][lang]}: {player.royalFame}</Text>
             )}
             {player.outlandsFame && (
-              <Text>Outlands Cont. Fame: {player.killFame}</Text>
+              <Text>{Translate['outlandsFame'][lang]}: {player.outlandsFame}</Text>
             )}
             {player.hellgateFame && (
-              <Text>Hellgate Fame: {player.killFame}</Text>
+              <Text>{Translate['hellgateFame'][lang]}: {player.hellgateFame}</Text>
             )}
-            {player.totalFame && <Text>Total Fame: {player.killFame}</Text>}
+            {player.totalFame && <Text>{Translate['tFame'][lang]}: {player.totalFame}</Text>}
           </View>
         </View>
       )}

@@ -2,21 +2,22 @@ import React from "react";
 import { StyleSheet, Text } from "react-native";
 import { Link } from "react-router-native";
 import MainLayout from '../layouts/MainLayout'
-export default function Home() {
+import Translate from "../functions/Translate";
+export default function Home({lang:[lang,setLang]}) {
   return (
     <MainLayout>
-      <Text style={styles.header}>Albion Online Tool</Text>
+      <Text style={styles.header}>{Translate['title'][lang]}</Text>
       <Link to="/market" style={styles.button}>
-        <Text style={styles.buttonText}>Market</Text>
+  <Text style={styles.buttonText}>{Translate['market'][lang]}</Text>
       </Link>
       <Link to="/guild" style={styles.button}>
-        <Text style={styles.buttonText}>Guilds</Text>
+  <Text style={styles.buttonText}>{Translate['guilds'][lang]}</Text>
       </Link>
       <Link to="/player" style={styles.button}>
-        <Text style={styles.buttonText}>Players</Text>
+  <Text style={styles.buttonText}>{Translate['players'][lang]}</Text>
       </Link>
       <Link to="/options" style={styles.button}>
-        <Text style={styles.buttonText}>Options</Text>
+  <Text style={styles.buttonText}>{Translate['settings'][lang]}</Text>
       </Link>
       <Text style={styles.mark}>@JMJLES</Text>
     </MainLayout>

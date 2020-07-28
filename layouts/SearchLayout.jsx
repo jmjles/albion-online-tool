@@ -2,11 +2,12 @@ import React from "react";
 import { StyleSheet, Text, View, BackHandler } from "react-native";
 import { useHistory,useLocation,} from "react-router-native";
 import {Icon} from 'native-base'
+import Translate from '../functions/Translate'
 export default function SearchLayout(props) {
   const past = useHistory();
   const handlePress = () => past.goBack();
   let name = useLocation().pathname.replace('/',"")
-
+  const lang = props.lang
    BackHandler.addEventListener("hardwareBackPress", () => {
      past.goBack();
      return true;
@@ -20,7 +21,7 @@ export default function SearchLayout(props) {
         style={{ color: "#FF5C00", fontSize: 28 }}
       />
       <View style={styles.container}>
-        <Text style={styles.title}>{name} Search</Text>
+  <Text style={styles.title}>{Translate[name][lang]} {Translate['search'][lang]}</Text>
       </View>
       {props.children}
     </View>

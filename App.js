@@ -8,7 +8,7 @@ import Guilds from "./components/Guilds";
 import Guild from "./components/Guild";
 
 import Players from "./components/Players";
-import Player from './components/Player'
+import Player from "./components/Player";
 
 import Market from "./components/Market";
 import ItemResult from "./components/ItemResult";
@@ -18,7 +18,7 @@ export default function App() {
   const [itemName, setItemName] = useState("");
   const [guilds, setGuilds] = useState([]);
   const [guildName, setGuildName] = useState([]);
-  const [playerName, setPlayerName ] = useState('')
+  const [playerName, setPlayerName] = useState("");
   return (
     <SafeLayout>
       <Router>
@@ -44,7 +44,8 @@ export default function App() {
               <Guild
                 guilds={[guilds, setGuilds]}
                 guildName={[guildName, setGuildName]}
-                playerName={[playerName,setPlayerName]}
+                playerName={[playerName, setPlayerName]}
+                lang={[lang, setLang]}
               />
             }
           />
@@ -54,6 +55,7 @@ export default function App() {
               <Guilds
                 guilds={[guilds, setGuilds]}
                 guildName={[guildName, setGuildName]}
+                lang={[lang, setLang]}
               />
             }
           />
@@ -63,20 +65,24 @@ export default function App() {
               <Player
                 playerName={[playerName, setPlayerName]}
                 guildName={[guildName, setGuildName]}
+                lang={[lang, setLang]}
               />
             }
           />
           <Route
             path="/player"
-            children={<Players playerName={[playerName, setPlayerName]} />}
-          />
-          <Route
-            path='/options'
             children={
-              <Options lang={[lang,setLang]}/>
+              <Players
+                playerName={[playerName, setPlayerName]}
+                lang={[lang, setLang]}
+              />
             }
           />
-          <Route path="/" component={Home} />
+          <Route
+            path="/options"
+            children={<Options lang={[lang, setLang]} />}
+          />
+          <Route path="/" children={<Home lang={[lang, setLang]} />} />
         </Switch>
       </Router>
     </SafeLayout>

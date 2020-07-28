@@ -11,8 +11,13 @@ import { Spinner } from "native-base";
 import { useHistory } from "react-router-native";
 import { getGuilds } from "../functions/albion-api";
 import SearchLayout from "../layouts/SearchLayout";
+import Translate from "../functions/Translate";
 
-export default function Guilds({guilds:[guilds,setGuilds],guildName:[guildName,setGuildName]}) {
+export default function Guilds({
+  guilds: [guilds, setGuilds],
+  guildName: [guildName, setGuildName],
+  lang: [lang, setLang],
+}) {
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -21,8 +26,8 @@ export default function Guilds({guilds:[guilds,setGuilds],guildName:[guildName,s
     setQuery(text);
   };
 
-  const handlePress = (id,name) => {
-    setGuildName(name)
+  const handlePress = (id, name) => {
+    setGuildName(name);
     history.push(`guild/${id}`);
   };
   const handleSubmit = async () => {
@@ -32,11 +37,16 @@ export default function Guilds({guilds:[guilds,setGuilds],guildName:[guildName,s
     setLoading(false);
   };
   return (
-    <SearchLayout>
+    <SearchLayout lang={lang}>
       <View style={styles.searchContainer}>
-        <TextInput onChangeText={handleChange} value={query} style={styles.textinput} placeholder="Enter a Guild Name"/>
+        <TextInput
+          onChangeText={handleChange}
+          value={query}
+          style={styles.textinput}
+          placeholder={Translate["enterGuild"][lang]}
+        />
         <TouchableOpacity onPress={handleSubmit} style={styles.button}>
-          <Text style={styles.buttonText}>Submit</Text>
+          <Text style={styles.buttonText}>{Translate["submit"][lang]}</Text>
         </TouchableOpacity>
       </View>
       {loading ? (
@@ -44,7 +54,10 @@ export default function Guilds({guilds:[guilds,setGuilds],guildName:[guildName,s
       ) : (
         <ScrollView style={styles.guildList}>
           {guilds.map((guild) => (
-            <TouchableOpacity onPress={() => handlePress(guild.id,guild.name)} style={styles.guild}>
+            <TouchableOpacity
+              onPress={() => handlePress(guild.id, guild.name)}
+              style={styles.guild}
+            >
               <Text>{guild.name}</Text>
             </TouchableOpacity>
           ))}
@@ -56,7 +69,7 @@ export default function Guilds({guilds:[guilds,setGuilds],guildName:[guildName,s
 const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: "row",
-    justifyContent:'center'
+    justifyContent: "center",
   },
   textinput: {
     borderColor: "#000",
@@ -68,18 +81,18 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: "#FF5C00",
-    borderWidth:2,
-    paddingTop:5,
-    paddingBottom:5,
-    paddingLeft:10,
-    paddingRight:10,
+    borderWidth: 2,
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   buttonText: {
     color: "white",
   },
   guildList: {
-    marginTop:15,
-    marginBottom:15
+    marginTop: 15,
+    marginBottom: 15,
   },
   guild: {
     paddingTop: 5,
@@ -87,6 +100,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     borderBottomWidth: 2,
     marginBottom: 15,
-    paddingLeft:10,
+    paddingLeft: 10,
   },
 });

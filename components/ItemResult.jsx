@@ -6,34 +6,37 @@ import {
   View,
   ScrollView,
   Picker,
-  Image
+  Image,
 } from "react-native";
-import { priceLookup,aboutItem } from "../functions/albion-api.js";
+import { priceLookup, aboutItem } from "../functions/albion-api.js";
 import ItemLayout from "../layouts/ItemLayout";
+import Translate from "../functions/Translate.js";
 
-export default function ItemResult({ itemName: [itemName, setItemName] , lang:[lang,setLang]}) {
+export default function ItemResult({
+  itemName: [itemName, setItemName],
+  lang: [lang, setLang],
+}) {
   const [quailtiy, setQuaility] = useState(1);
   const [prices, setPrices] = useState([]);
   const [img, setImg] = useState("");
-  const [desc,setDesc] = useState('')
+  const [desc, setDesc] = useState("");
   const uniName = useParams().id;
   useEffect(() => {
     const getItem = async () => {
       const result = await priceLookup(uniName, quailtiy);
-      setDesc(aboutItem(uniName,lang))
+      setDesc(aboutItem(uniName, lang));
       setPrices(result.results);
       setImg(result.img);
-      console.log(img)
     };
     getItem();
   }, [quailtiy]);
 
   const qualities = [
-    { name: "Normal", value: 1 },
-    { name: "Good", value: 2 },
-    { name: "Outstanding", value: 3 },
-    { name: "Excellent", value: 4 },
-    { name: "Masterpeace", value: 5 },
+    { name: Translate["normal"][lang], value: 1 },
+    { name: Translate["good"][lang], value: 2 },
+    { name: Translate["outstanding"][lang], value: 3 },
+    { name: Translate["excellent"][lang], value: 4 },
+    { name: Translate["masterpiece"][lang], value: 5 },
   ];
   const handleQuality = (val) => {
     setQuaility(val);
@@ -46,7 +49,7 @@ export default function ItemResult({ itemName: [itemName, setItemName] , lang:[l
       </View>
 
       <View style={styles.quailtiyContainer}>
-        <Text style={styles.label}>Quality:</Text>
+        <Text style={styles.label}>{Translate["quality"][lang]}:</Text>
         <Picker
           selectedValue={quailtiy}
           onValueChange={handleQuality}
@@ -70,17 +73,23 @@ export default function ItemResult({ itemName: [itemName, setItemName] , lang:[l
               {item.city}
             </Text>
             {item.sellPrice == 0 ? (
-              <Text style={styles.itemText}>Sell Price: N/A</Text>
+              <Text style={styles.itemText}>
+                {Translate["sPrice"][lang]}: N/A
+              </Text>
             ) : (
               <Text style={styles.itemText}>
-                Sell Price: {item.sellPrice} | {item.sellPriceDate}
+                {Translate["sPrice"][lang]}: {item.sellPrice} |{" "}
+                {item.sellPriceDate}
               </Text>
             )}
             {item.buyPrice == 0 ? (
-              <Text style={styles.itemText}>Buy Price: N/A</Text>
+              <Text style={styles.itemText}>
+                {Translate["bPrice"][lang]}: N/A
+              </Text>
             ) : (
               <Text style={styles.itemText}>
-                Buy Price: {item.buyPrice} | {item.buyPriceDate}
+                {Translate["bPrice"][lang]}: {item.buyPrice} |{" "}
+                {item.buyPriceDate}
               </Text>
             )}
           </View>
@@ -100,7 +109,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     borderBottomWidth: 2,
     paddingLeft: 10,
-    paddingBottom:10
+    paddingBottom: 10,
   },
   desc: {
     flex: 1,

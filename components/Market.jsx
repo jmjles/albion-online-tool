@@ -10,6 +10,7 @@ import {
 import { useHistory } from "react-router-native";
 import { productName } from "../functions/albion-api";
 import SearchLayout from "../layouts/SearchLayout";
+import Translate from "../functions/Translate";
 
 export default function Market({ setItemName, lang: [lang, setLang] }) {
   const [query, setQuery] = useState("");
@@ -26,13 +27,13 @@ export default function Market({ setItemName, lang: [lang, setLang] }) {
     history.push(`market/${uniName}`);
   };
   return (
-    <SearchLayout>
+    <SearchLayout lang={lang}>
       <View style={styles.container}>
         <TextInput
           onChangeText={handleChange}
           style={styles.textinput}
           value={query}
-          placeholder="Enter an Item Name"
+          placeholder={Translate['enterItem'][lang]}
         />
       </View>
       <ScrollView style={styles.itemList}>
