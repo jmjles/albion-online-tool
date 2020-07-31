@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NativeRouter as Router, Route, Switch } from "react-router-native";
+import AsyncStorage from "@react-native-community/async-storage";
 
 import Home from "./components/Home";
 import SafeLayout from "./layouts/SafeLayout";
@@ -13,8 +14,28 @@ import Player from "./components/Player";
 import Market from "./components/Market";
 import ItemResult from "./components/ItemResult";
 import Options from "./components/Options";
+
 export default function App() {
   const [lang, setLang] = useState("EN-US");
+
+  useEffect(() => {
+    const getLang = async () => {
+      try {
+        const savedLang = await AsyncStorage.getItem("lang");
+        if (savedLang !== null) return savedLang;
+        return "EN-US";
+      } catch {}
+    };
+    getLang();
+  }, []);
+  useEffect(() => {
+    const saveLang = async () => {
+      try {
+        await AsyncStorage.setItem("lang", lang);
+      } catch {}
+    };
+    saveLang();
+  }, [lang]);
   const [itemName, setItemName] = useState("");
   const [guilds, setGuilds] = useState([]);
   const [guildName, setGuildName] = useState([]);
