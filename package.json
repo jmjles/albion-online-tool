@@ -8,6 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.11.0",
     "@react-native-community/picker": "^1.6.5",
     "axios": "^0.19.2",
     "expo": "~37.0.3",
