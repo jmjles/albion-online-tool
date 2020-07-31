@@ -1,9 +1,9 @@
 import React from "react";
-import { StyleSheet, Text } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import MainLayout from "../layouts/MainLayout";
 import { Link } from "react-router-native";
 import { Picker } from "native-base";
-import translate from '../functions/Translate.js'
+import translate from "../functions/Translate.js";
 
 export default function Options({ lang: [lang, setLang] }) {
   const languages = [
@@ -21,20 +21,23 @@ export default function Options({ lang: [lang, setLang] }) {
   return (
     <MainLayout>
       <Text style={styles.header}>{translate["settings"][lang]}</Text>
-      <Picker
-        selectedValue={lang}
-        onValueChange={handleLang}
-        mode="dropdown"
-        style={styles.picker}
-      >
-        {languages.map((language) => (
-          <Picker.Item
-            key={language.value}
-            value={language.value}
-            label={language.name}
-          />
-        ))}
-      </Picker>
+      <View style={styles.pContainer}>
+        <Text style={styles.pickerLabel}>{translate["language"][lang]}:</Text>
+        <Picker
+          selectedValue={lang}
+          onValueChange={handleLang}
+          mode="dropdown"
+          style={styles.picker}
+        >
+          {languages.map((language) => (
+            <Picker.Item
+              key={language.value}
+              value={language.value}
+              label={language.name}
+            />
+          ))}
+        </Picker>
+      </View>
       <Link style={styles.button} to="/">
         <Text style={styles.buttonText}>{translate["back"][lang]}</Text>
       </Link>
@@ -49,8 +52,18 @@ const styles = StyleSheet.create({
     marginTop: 58,
     marginBottom: 118,
   },
+  pickerLabel:{
+    fontSize:24
+  },
   picker: {
-    minWidth: 170,
+    maxWidth:170,
+    marginLeft:10
+  },
+  pContainer:{
+    flexDirection:'row',
+    alignItems:'center',
+    justifyContent:'center',
+    marginBottom:58
   },
   button: {
     minWidth: 150,

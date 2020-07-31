@@ -405,6 +405,17 @@ const Translate = {
     [zh]: "总名次",
     [ko]: "총 명성",
   },
+  language: {
+    [en]: "Language",
+    [de]: "Sprache",
+    [fr]: "Langue",
+    [ru]: "Язык",
+    [pl]: "Język",
+    [es]: "Idioma",
+    [pt]: "Idioma",
+    [zh]: "语言",
+    [ko]: "언어",
+  },
 };
 /*
   word: {
