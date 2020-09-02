@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.11.0",
-    "@react-native-community/picker": "^1.6.5",
+    "@react-native-community/picker": "^1.6.6",
     "axios": "^0.19.2",
     "expo": "~37.0.3",
     "expo-font": "~8.1.0",
@@ -22,7 +22,7 @@
     "react-router-native": "^5.2.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.10.5",
+    "@babel/core": "^7.11.1",
     "babel-preset-expo": "~8.1.0"
   },
   "private": true

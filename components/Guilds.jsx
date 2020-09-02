@@ -44,13 +44,16 @@ export default function Guilds({
           value={query}
           style={styles.textinput}
           placeholder={Translate["enterGuild"][lang]}
+          autoFocus={true}
         />
         <TouchableOpacity onPress={handleSubmit} style={styles.button}>
           <Text style={styles.buttonText}>{Translate["submit"][lang]}</Text>
         </TouchableOpacity>
       </View>
       {loading ? (
-        <Spinner color="red" />
+        <View style={styles.loadingContainer}>
+          <Spinner color="red" />
+        </View>
       ) : (
         <ScrollView style={styles.guildList}>
           {guilds.map((guild) => (
@@ -71,17 +74,24 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
   },
+  loadingContainer: {
+    flex: 1,
+  },
   textinput: {
     borderColor: "#000",
     borderStyle: "solid",
     borderWidth: 1,
     width: 200,
-    textAlign: "center",
+    paddingTop: 2,
+    paddingBottom: 2,
+    paddingLeft: 10,
+    paddingRight: 10,
     marginRight: 20,
+    fontSize: 18,
   },
   button: {
     backgroundColor: "#FF5C00",
-    borderWidth: 2,
+    borderWidth: 1,
     paddingTop: 5,
     paddingBottom: 5,
     paddingLeft: 10,
@@ -89,6 +99,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "white",
+    fontSize: 18,
   },
   guildList: {
     marginTop: 15,

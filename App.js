@@ -22,12 +22,12 @@ export default function App() {
     const getLang = async () => {
       try {
         const savedLang = await AsyncStorage.getItem("lang");
-        if (savedLang !== null) return savedLang;
-        return "EN-US";
+        if (savedLang !== null) setLang(savedLang)
       } catch {}
     };
     getLang();
   }, []);
+
   useEffect(() => {
     const saveLang = async () => {
       try {
@@ -36,10 +36,12 @@ export default function App() {
     };
     saveLang();
   }, [lang]);
+
   const [itemName, setItemName] = useState("");
   const [guilds, setGuilds] = useState([]);
   const [guildName, setGuildName] = useState([]);
   const [playerName, setPlayerName] = useState("");
+  
   return (
     <SafeLayout>
       <Router>

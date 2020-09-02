@@ -6,6 +6,7 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
+  Image
 } from "react-native";
 import { useHistory } from "react-router-native";
 import { productName } from "../functions/albion-api";
@@ -33,7 +34,8 @@ export default function Market({ setItemName, lang: [lang, setLang] }) {
           onChangeText={handleChange}
           style={styles.textinput}
           value={query}
-          placeholder={Translate['enterItem'][lang]}
+          placeholder={Translate["enterItem"][lang]}
+          autoFocus={true}
         />
       </View>
       <ScrollView style={styles.itemList}>
@@ -43,6 +45,7 @@ export default function Market({ setItemName, lang: [lang, setLang] }) {
             style={styles.item}
             onPress={() => handlePress(entry.uniName, entry.displayName)}
           >
+            <Image source={{uri:`https://render.albiononline.com/v1/item/${entry.uniName}.png?quality=1`}} style={{width:50,height:50}} />
             <Text style={styles.itemText}>{entry.displayName}</Text>
           </TouchableOpacity>
         ))}
@@ -62,19 +65,26 @@ const styles = StyleSheet.create({
     borderStyle: "solid",
     borderWidth: 1,
     width: 200,
-    textAlign:'center'
+    paddingTop: 2,
+    paddingBottom: 2,
+    paddingLeft: 10,
+    paddingRight: 10,
+    fontSize: 18,
   },
   itemList: {
-    marginBottom:15
+    marginBottom: 15,
   },
   item: {
     paddingTop: 5,
-    paddingLeft:10,
+    paddingLeft: 10,
     paddingBottom: 5,
     borderBottomWidth: 2,
-    marginBottom: 15,
+    marginBottom: 5,
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
   },
-  itemText:{
+  itemText: {
     fontSize: 18,
-  }
+  },
 });

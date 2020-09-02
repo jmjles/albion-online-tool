@@ -1,11 +1,18 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity as Button,
+} from "react-native";
 import MainLayout from "../layouts/MainLayout";
-import { Link } from "react-router-native";
+import { Link, useHistory } from "react-router-native";
 import { Picker } from "native-base";
 import translate from "../functions/Translate.js";
 
 export default function Options({ lang: [lang, setLang] }) {
+  const history = useHistory();
+  const handlePast = () => history.goBack();
   const languages = [
     { name: "English", value: "EN-US" },
     { name: "Deutsche", value: "DE-DE" },
@@ -38,9 +45,9 @@ export default function Options({ lang: [lang, setLang] }) {
           ))}
         </Picker>
       </View>
-      <Link style={styles.button} to="/">
+      <Button style={styles.button} onPress={handlePast}>
         <Text style={styles.buttonText}>{translate["back"][lang]}</Text>
-      </Link>
+      </Button>
     </MainLayout>
   );
 }
@@ -52,18 +59,18 @@ const styles = StyleSheet.create({
     marginTop: 58,
     marginBottom: 118,
   },
-  pickerLabel:{
-    fontSize:24
+  pickerLabel: {
+    fontSize: 24,
   },
   picker: {
-    maxWidth:170,
-    marginLeft:10
+    maxWidth: 170,
+    marginLeft: 10,
   },
-  pContainer:{
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'center',
-    marginBottom:58
+  pContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 58,
   },
   button: {
     minWidth: 150,
