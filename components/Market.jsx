@@ -28,7 +28,7 @@ export default function Market({ setItemName, lang: [lang, setLang] }) {
     history.push(`market/${uniName}`);
   };
   return (
-    <SearchLayout lang={lang}>
+    <SearchLayout lang={lang} name="market">
       <View style={styles.container}>
         <TextInput
           onChangeText={handleChange}

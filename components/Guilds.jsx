@@ -37,7 +37,7 @@ export default function Guilds({
     setLoading(false);
   };
   return (
-    <SearchLayout lang={lang}>
+    <SearchLayout lang={lang} name="guild">
       <View style={styles.searchContainer}>
         <TextInput
           onChangeText={handleChange}
@@ -60,6 +60,7 @@ export default function Guilds({
             <TouchableOpacity
               onPress={() => handlePress(guild.id, guild.name)}
               style={styles.guild}
+              key={guild.name}
             >
               <Text>{guild.name}</Text>
             </TouchableOpacity>

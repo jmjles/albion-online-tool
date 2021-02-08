@@ -1,19 +1,12 @@
 import React from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  BackHandler,
-  TouchableOpacity as Button,
-} from "react-native";
-import { useHistory, useLocation, Link } from "react-router-native";
+import { StyleSheet, Text, View, BackHandler } from "react-native";
+import { useHistory, Link } from "react-router-native";
 import { Icon } from "native-base";
 import Translate from "../functions/Translate";
 export default function SearchLayout(props) {
   const past = useHistory();
-  const handleBack = () => past.push("/");
-  let name = useLocation().pathname.replace("/", "");
-  const lang = props.lang;
+  const { lang, name } = props;
+
   BackHandler.addEventListener("hardwareBackPress", () => {
     past.push("/");
     return true;
@@ -22,12 +15,6 @@ export default function SearchLayout(props) {
   return (
     <View style={styles.root}>
       <View style={styles.topContainer}>
-        <Icon
-          type="FontAwesome"
-          name="arrow-left"
-          onPress={handleBack}
-          style={{ color: "#fff", fontSize: 28 }}
-        />
         <Text style={styles.app}>
           {Translate[name][lang]} {Translate["search"][lang]}
         </Text>
@@ -48,7 +35,7 @@ export default function SearchLayout(props) {
           <Text
             style={name === "market" ? styles.activeText : styles.buttonText}
           >
-            Market
+            {Translate["market"][lang]}
           </Text>
         </Link>
         <Link
@@ -58,7 +45,7 @@ export default function SearchLayout(props) {
           <Text
             style={name === "guild" ? styles.activeText : styles.buttonText}
           >
-            Guilds
+            {Translate["guilds"][lang]}
           </Text>
         </Link>
         <Link
@@ -68,7 +55,7 @@ export default function SearchLayout(props) {
           <Text
             style={name === "player" ? styles.activeText : styles.buttonText}
           >
-            Player
+            {Translate["player"][lang]}
           </Text>
         </Link>
       </View>

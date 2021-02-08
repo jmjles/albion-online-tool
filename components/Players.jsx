@@ -37,7 +37,7 @@ export default function Players({
   };
 
   return (
-    <SearchLayout lang={lang}>
+    <SearchLayout lang={lang} name="player">
       <View style={styles.searchContainer}>
         <TextInput
           onChangeText={handleChange}

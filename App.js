@@ -22,7 +22,7 @@ export default function App() {
     const getLang = async () => {
       try {
         const savedLang = await AsyncStorage.getItem("lang");
-        if (savedLang !== null) setLang(savedLang)
+        if (savedLang !== null) setLang(savedLang);
       } catch {}
     };
     getLang();
@@ -41,7 +41,7 @@ export default function App() {
   const [guilds, setGuilds] = useState([]);
   const [guildName, setGuildName] = useState([]);
   const [playerName, setPlayerName] = useState("");
-  
+
   return (
     <SafeLayout>
       <Router>
@@ -55,12 +55,7 @@ export default function App() {
               />
             }
           />
-          <Route
-            path="/market"
-            children={
-              <Market setItemName={setItemName} lang={[lang, setLang]} />
-            }
-          />
+
           <Route
             path="/guild/:id"
             children={
@@ -105,7 +100,12 @@ export default function App() {
             path="/options"
             children={<Options lang={[lang, setLang]} />}
           />
-          <Route path="/" children={<Home lang={[lang, setLang]} />} />
+          <Route
+            path="/"
+            children={
+              <Market setItemName={setItemName} lang={[lang, setLang]} />
+            }
+          />
         </Switch>
       </Router>
     </SafeLayout>

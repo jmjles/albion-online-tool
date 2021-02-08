@@ -18,7 +18,7 @@ export default function ItemResult({
 }) {
   const [quailtiy, setQuaility] = useState(1);
   const [prices, setPrices] = useState([]);
-  const [img, setImg] = useState("");
+  const [img, setImg] = useState(null);
   const [desc, setDesc] = useState("");
   const uniName = useParams().id;
   useEffect(() => {

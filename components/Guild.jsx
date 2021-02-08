@@ -102,6 +102,7 @@ export default function ItemResult({
                 <TouchableOpacity
                   style={styles.member}
                   onPress={() => handlePress(member.id, member.name)}
+                  key={member.name}
                 >
                   <Text style={styles.memberText}>{member.name}</Text>
                 </TouchableOpacity>

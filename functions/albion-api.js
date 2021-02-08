@@ -2,10 +2,9 @@ const axios = require("axios");
 const itemList = require("../assets/items.json");
 const moment = require("moment");
 
-
-const formatNum = num =>{
+const formatNum = (num) => {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+};
 //* Gold Lookup
 module.exports.goldPriceLookup = async () => {
   const { data } = await axios.get(
@@ -42,7 +41,7 @@ module.exports.productName = (name, lang) => {
   for (let i = 0; i < filtered.length && i < 20; i++) {
     const name = filtered[i].LocalizedNames[lang];
     const uniName = filtered[i].UniqueName;
-    const displayName = `${uniName.substring(0, 2)}${
+    const displayName = `${uniName[0] !== "T" ? "" : uniName.substring(0, 2)}${
       uniName.includes("@") ? `.${uniName.charAt(uniName.length - 1)}` : ``
     } ${name}`;
 
@@ -202,7 +201,7 @@ module.exports.aboutItem = (name, lang) => {
     if (filtered.length === 0) {
       return "";
     }
-    
+
     const result = filtered[0];
 
     return result.LocalizedDescriptions[lang];
