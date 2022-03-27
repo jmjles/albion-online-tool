@@ -10,7 +10,7 @@
   "dependencies": {
     "@react-native-community/async-storage": "~1.12.0",
     "@react-native-community/picker": "^1.8.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.2",
     "expo": "^40.0.0",
     "expo-font": "~8.4.0",
     "moment": "^2.29.1",
